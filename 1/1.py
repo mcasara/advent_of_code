@@ -3,7 +3,6 @@ def read_input(file):
         content = f.readlines()
     return(content)
 
-
 def main():
     print (read_input("input_1.txt"))
 
