@@ -30,8 +30,10 @@ def sum_list_with_null(l):
     return sum_dict
 
 def main():
-    liste= sum_list_with_null(read_input("1/input_1.txt", 'float'))
-    return(print( max(liste.items(), key=lambda k: k[1])))
+    dict1= sum_list_with_null(read_input("1/input_1.txt", 'float'))
+    sorted_dict = {k: v for k, v in sorted(dict1.items(), key=lambda item: item[1], reverse=True)}
+    return(print("Part1:", sum([k[1] for k in list(sorted_dict.items())[:1]]),
+           "\nPart2:", sum([k[1] for k in list(sorted_dict.items())[:3]])))
 
 if __name__ == "__main__" :
     main()
