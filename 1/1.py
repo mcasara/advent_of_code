@@ -24,16 +24,15 @@ def sum_list_with_null(l):
     for amount in l:
         if amount == 'null':
             i+=1
-            sum_dict[i] = float(0)
+            sum_dict[i] = int(0)
         else:
             sum_dict[i]+=amount
     return sum_dict
 
 def main():
-    dict1= sum_list_with_null(read_input("1/input_1.txt", 'float'))
+    dict1= sum_list_with_null(read_input("1/input_1.txt", 'int'))
     sorted_dict = {k: v for k, v in sorted(dict1.items(), key=lambda item: item[1], reverse=True)}
-    return(print("Part1:", sum([k[1] for k in list(sorted_dict.items())[:1]]),
-           "\nPart2:", sum([k[1] for k in list(sorted_dict.items())[:3]])))
+    return(print(f"Part1: {sum([k[1] for k in list(sorted_dict.items())[:1]])} \nPart2 : {sum([k[1] for k in list(sorted_dict.items())[:3]])}"))
 
 if __name__ == "__main__" :
     main()
