@@ -72,7 +72,7 @@ def main():
     adv, me = parse_content(read_input("input_2.txt"))
     return print(
         f"Part 1: {sum(points_part_1(adv, me)) + sum(me)}"
-        f"\nPart 2: {sum(points_part_2(adv, me))}")
+        f"Part 2: {sum(points_part_2(adv, me))}")
 
 
 if __name__ == "__main__":
