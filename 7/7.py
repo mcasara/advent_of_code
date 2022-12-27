@@ -9,10 +9,10 @@ def read_input(file):
     return content
 
 
-def read_all_directories(input):
+def read_all_directories(input, part):
     current_dir = ['root']
     directories_tree = dict()
-    directories_size = dict({'root':0})
+    directories_size = dict({'root': 0})
     k = 0
     while k < len(input):
         if input[k] == '$ cd ..':
@@ -47,14 +47,18 @@ def read_all_directories(input):
             directory = '/'.join(items)
             if len(items) == length:
                 directories_size[directory] += sum(
-                    [directories_size[k] for k in directories_tree[directory].split(', ')])
+                    [directories_size[k] for k in
+                     directories_tree[directory].split(', ')])
         length -= 1
-    return sum([k if k < 100000 else 0 for k in list(directories_size.values())])
-
+    if part == 1:
+        return sum([k if k < 100000 else 0 for k in list(directories_size.values())])
+    else:
+        treshold = directories_size['root']-40000000
+        return treshold+min([k-treshold if k>treshold else 10000000 for k in list(directories_size.values())])
 
 def main():
     file = read_input("input_7.txt")
-    return print(f"Part 1: {read_all_directories(file[1:])}")
+    return print(f"Part 1: {read_all_directories(file[1:], 2)}")
     #              f"\nPart 2: {solve(file[0], 14)}")
 
 

@@ -1,4 +1,5 @@
 $ cd /
+$ cd root
 $ ls
 268495 jgfbgjdb
 dir ltcqgnc
