@@ -53,13 +53,15 @@ def read_all_directories(input, part):
     if part == 1:
         return sum([k if k < 100000 else 0 for k in list(directories_size.values())])
     else:
-        treshold = directories_size['root']-40000000
-        return treshold+min([k-treshold if k>treshold else 10000000 for k in list(directories_size.values())])
+        treshold = directories_size['root'] - 40000000
+        return treshold + min([k - treshold if k > treshold else 10000000 for k in
+                               list(directories_size.values())])
+
 
 def main():
     file = read_input("input_7.txt")
-    return print(f"Part 1: {read_all_directories(file[1:], 2)}")
-    #              f"\nPart 2: {solve(file[0], 14)}")
+    return print(f"Part 1: {read_all_directories(file[1:], 1)}"
+                 f"\nPart 2: {read_all_directories(file[1:], 2)}")
 
 
 if __name__ == "__main__":
