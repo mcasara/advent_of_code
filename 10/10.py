@@ -34,7 +34,7 @@ def parse_cycle(input, part):
         return sum([(k + 1) * cycles_V[k] for k in str])
     else:
         big_list = []
-        for k in range(240):
+        for k in range(len(cycles_V)-1):
             if k % 40 in [cycles_V[k] - 1, cycles_V[k], cycles_V[k] + 1]:
                 big_list.append('#')
             else:
