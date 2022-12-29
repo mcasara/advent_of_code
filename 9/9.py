@@ -89,8 +89,6 @@ def path(input):
 def main():
     file = read_input("input_9.txt")
     print(path(file))
-    # return print(f"Part 1: {count_visible(file)}"
-    #              f"\nPart 2: {visible_from_score(file)}")
 
 
 if __name__ == "__main__":
