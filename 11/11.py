@@ -1,5 +1,6 @@
 import time
 from math import floor
+from math import prod
 
 
 def read_input(file):
@@ -35,6 +36,8 @@ def monkey_function(monkey, item, part):
             worry += int(monkey.operand)
     if part == 1:
         worry = worry//3
+    else:
+        worry = worry%9699690
     if worry % monkey.divisibility == 0:
         throw_to = monkey.throw_to[0]
     else:
@@ -76,10 +79,11 @@ def main():
     file = read_input("input_11.txt")
     liste_inspect = [i.inspect_number for i in round(file, 1, 20)]
     liste_inspect.sort(reverse = True)
-    # liste_inspect_2 = [i.inspect_number for i in round(file, 2, 10000)]
-    # liste_inspect_2.sort(reverse = True)
-    return print(f"Part 1: {liste_inspect[0] * liste_inspect[1]}")
-                 # f"\nPart 2: {liste_inspect_2[0] * liste_inspect_2[1]}")
+    # return(print( prod([i.divisibility for i in round(file, 1, 20)])))
+    liste_inspect_2 = [i.inspect_number for i in round(file, 2, 10000)]
+    liste_inspect_2.sort(reverse = True)
+    return print(f"Part 1: {liste_inspect[0] * liste_inspect[1]}"
+                 f"\nPart 2: {liste_inspect_2[0] * liste_inspect_2[1]}")
 
 
 if __name__ == "__main__":
