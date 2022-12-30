@@ -35,29 +35,14 @@ def monkey_function(monkey, item, part):
         else:
             worry += int(monkey.operand)
     if part == 1:
-        worry = worry//3
+        worry = worry // 3
     else:
-        worry = worry%9699690
+        worry = worry % 9699690
     if worry % monkey.divisibility == 0:
         throw_to = monkey.throw_to[0]
     else:
         throw_to = monkey.throw_to[1]
     return [worry, throw_to]
-
-def round(input, part, n):
-    zoo = create_zoo(input)
-    a=0
-    for i in range (n):
-        for mk in range(8):
-            for item in zoo[mk].items:
-                zoo[mk].inspect_number += 1
-                item_to_throw, throw_to = monkey_function(zoo[mk], item, part)
-                zoo[throw_to].items.append(item_to_throw)
-            zoo[mk].items = []
-        if i % 100 == 0:
-            print( f"{1*a} % done")
-            a+=1
-    return zoo
 
 
 def create_zoo(input):
@@ -75,13 +60,24 @@ def create_zoo(input):
     return zoo
 
 
+def round(input, part, n):
+    zoo = create_zoo(input)
+    for i in range(n):
+        for mk in range(8):
+            for item in zoo[mk].items:
+                zoo[mk].inspect_number += 1
+                item_to_throw, throw_to = monkey_function(zoo[mk], item, part)
+                zoo[throw_to].items.append(item_to_throw)
+            zoo[mk].items = []
+    return zoo
+
+
 def main():
     file = read_input("input_11.txt")
     liste_inspect = [i.inspect_number for i in round(file, 1, 20)]
-    liste_inspect.sort(reverse = True)
-    # return(print( prod([i.divisibility for i in round(file, 1, 20)])))
+    liste_inspect.sort(reverse=True)
     liste_inspect_2 = [i.inspect_number for i in round(file, 2, 10000)]
-    liste_inspect_2.sort(reverse = True)
+    liste_inspect_2.sort(reverse=True)
     return print(f"Part 1: {liste_inspect[0] * liste_inspect[1]}"
                  f"\nPart 2: {liste_inspect_2[0] * liste_inspect_2[1]}")
 
