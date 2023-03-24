@@ -1,6 +1,4 @@
 import time
-from math import floor
-from math import prod
 
 
 def read_input(file):
