@@ -1,0 +1,172 @@
+---
+models:
+  - name: dm_date
+    description: "{{ doc('dm_date') }}"
+    config:
+      schema: dim
+      materialized: picnic_table_overwrite
+      grants:
+        select: ["analyst", "reporting"]
+    meta:
+      comment: "Date dimension"
+    columns:
+      - name: key_date
+        type: integer
+        description: "Date dimension key"
+        constraints:
+          - type: primary_key
+        tests:
+          - unique:
+              tags:
+                - test-uniqueness
+      - name: key_week
+        type: integer
+        description: "Week dimension key"
+        constraints:
+          - type: not_null
+      - name: key_financial_period
+        type: integer
+        description: "Financial Period dimension key"
+        constraints:
+          - type: not_null
+      - name: key_quarter
+        type: integer
+        description: "Quarter dimension key"
+        constraints:
+          - type: not_null
+      - name: key_year
+        type: integer
+        description: "Year dimension key"
+        constraints:
+          - type: not_null
+      - name: date
+        type: date
+        description: "Date"
+      - name: formatted_date
+        type: varchar
+        description: "Formatted date"
+      - name: day_of_week
+        type: integer
+        description: "Day of week"
+      - name: day_of_month
+        type: integer
+        description: "Day of month"
+      - name: day_of_year
+        type: integer
+        description: "Day of year"
+      - name: weekday_name
+        type: varchar
+        description: "Weekday name"
+      - name: weekend
+        type: varchar
+        description: "Weekend or weekday flag"
+      - name: year
+        type: integer
+        description: "Year"
+      - name: year_start_date
+        type: date
+        description: "Year start date"
+      - name: years_between
+        type: integer
+        description: "Years between date and current date"
+      - name: year_iso
+        type: integer
+        description: "Year of the ISO week"
+      - name: year_iso_start_date
+        type: date
+        description: "Year of the ISO week start date"
+      - name: years_iso_between
+        type: integer
+        description: "Years between date and current date, based on ISO week"
+      - name: quarter
+        type: varchar
+        description: "Quarter"
+      - name: year_quarter
+        type: varchar
+        description:
+          "Year and quarter in the format ''<year>/<quarter>''. E.g. ''2023/Q3''"
+      - name: quarter_start_date
+        type: date
+        description: "Quarter start date"
+      - name: quarters_between
+        type: integer
+        description: "Quarters between date and current date"
+      - name: quarter_iso
+        type: varchar
+        description: "Quarter of the ISO week"
+      - name: year_quarter_iso
+        type: varchar
+        description:
+          "Year and quarter of the ISO week in the format ''<year>/<quarter>''. E.g.
+          ''2023/Q3''"
+      - name: quarter_iso_start_date
+        type: date
+        description: "Quarter of the ISO week start date"
+      - name: quarters_iso_between
+        type: integer
+        description: "Quarters ISO between date and current date"
+      - name: month
+        type: integer
+        description: "Month"
+      - name: month_name
+        type: varchar
+        description: "Month name"
+      - name: year_month
+        type: varchar
+        description: "Year and month in the format ''<year>/<month>''. E.g. ''2023/06''"
+      - name: month_start_date
+        type: date
+        description: "Month start date"
+      - name: financial_period
+        type: varchar
+        description:
+          "Financial period in the format ''Period <period>''. E.g. ''Period 09''"
+      - name: year_financial_period
+        type: varchar
+        description:
+          "Year and financial period in the format ''<year>-<period>''. E.g. ''2023-06''"
+      - name: financial_period_start_date
+        type: date
+        description: "Financial period start date"
+      - name: financial_periods_between
+        type: integer
+        description: "Financial periods between date and current date"
+      - name: calendar_week
+        type: integer
+        description: "Calendar week"
+      - name: year_calendar_week
+        type: varchar
+        description:
+          "Year and calendar week in the format ''<year>/<week>''. E.g. ''2023/01''"
+      - name: week_start_date
+        type: date
+        description: "Week start date"
+      - name: weeks_between
+        type: integer
+        description: "Weeks between date and current date"
+      - name: promo_calendar_week
+        type: integer
+        description: "Promo calendar week"
+      - name: year_promo_calendar_week
+        type: varchar
+        description:
+          "Year and promo calendar week in the format ''<year>/<week>''. E.g.
+          ''2023/01''"
+      - name: promo_week_start_date
+        type: date
+        description: "Promo week start date"
+      - name: promo_weeks_between
+        type: integer
+        description: "Promo weeks between date and current date"
+      - name: sunrise_time
+        type: timestamp
+        description: "Sunrise time"
+      - name: sunset_time
+        type: timestamp
+        description: "Sunset time"
+      - name: dawn_time
+        type: timestamp
+        description: "Dawn time"
+      - name: dusk_time
+        type: timestamp
+        description: "Dusk time"
