@@ -63,7 +63,9 @@ class WindowFrame(tk.Tk):
         button_delete_rpd = tk.Button(
             self, text="Delete RPDs", command=self.remove_item, relief="solid"
         )
-
+        button_send_mail = tk.Button(
+            self, text="Send email to Eugenio", command=self.send_email, relief="solid"
+        )
         # Create grid
         self.image_grid.grid(
             column=0, row=0, sticky=tk.NSEW, padx=5, pady=5, columnspan=2
@@ -74,6 +76,7 @@ class WindowFrame(tk.Tk):
         button_load_rpd.grid(column=4, row=3, padx=5, pady=5)
         button_delete_rpd.grid(column=4, row=4, padx=50, pady=5)
         button_dump.grid(column=0, row=6, padx=5, pady=5)
+        button_send_mail.grid(column=4, row=6, padx=5, pady=5)
         self.text.grid(column=0, row=1, sticky=tk.NSEW, padx=5, pady=5, columnspan=2)
         sb.grid(row=1, column=2, sticky=tk.NS)
         self.list_box.grid(row=1, column=4, sticky=tk.NS)
@@ -132,13 +135,11 @@ class WindowFrame(tk.Tk):
     def alter_config(self, rpd):
         original_name = self.entry_original_model.get()
         rpd_noun = self.entry_original_model.get().split("_")[1].capitalize()
-        comment = f"{rpd_noun} {rpd.replace(original_name+'''_''', '', 1)} role playing dimension"
+        comment = f"{rpd_noun} {rpd.replace(original_name + '''_''', '', 1)} role playing dimension"
         self.rpd_content["models"][0]["name"] = rpd
         self.rpd_content["models"][0]["description"] = f"{{{{ doc('{rpd}') }}}}"
         self.rpd_content["models"][0]["config"]["materialized"] = "picnic_view"
-        self.rpd_content["models"][0]["meta"]["comment"] = DoubleQuotedScalarString(
-            comment
-        )
+        self.rpd_content["models"][0]["meta"]["comment"] = comment
 
     def _dump_to_yml(self) -> None:
         try:
@@ -149,11 +150,11 @@ class WindowFrame(tk.Tk):
                 ).mkdir(parents=True, exist_ok=True)
 
                 with open(
-                    Path(
-                        f"/Users/maximecasara/git/advent_of_code/2023/gui_tkinter/{rpd}"
-                    )
-                    / name,
-                    "w+",
+                        Path(
+                            f"/Users/maximecasara/git/advent_of_code/2023/gui_tkinter/{rpd}"
+                        )
+                        / name,
+                        "w+",
                 ) as f:
                     self.alter_key(rpd)
                     self.alter_config(rpd)
@@ -181,6 +182,9 @@ class WindowFrame(tk.Tk):
         selected_checkboxs = self.list_box.curselection()
         for selected_checkbox in selected_checkboxs[::-1]:
             self.list_box.delete(selected_checkbox)
+
+    def send_email(self):
+        pass
 
 
 if __name__ == "__main__":
